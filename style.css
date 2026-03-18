@@ -1,0 +1,1157 @@
+/* DEFINIÇÃO DA COR DINÂMICA */
+
+:root {
+
+    --primary-color: #28a745;
+
+    --cor-precificador: #94a3b8;
+
+    --cor-assinatura: #cbd5e1;
+
+}
+
+
+
+body { font-family: 'Montserrat', sans-serif; margin: 0; padding: 0; background: #f1f5f9; overflow-x: hidden; }
+
+
+
+/* HEADER COMPLETO RESTAURADO */
+
+.header-wrapper { width: 100%; height: 160px; display: flex; align-items: center; padding: 0 40px; box-sizing: border-box; background: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 15px rgba(0,0,0,0.05); }
+
+.container-master { max-width: 1600px; width: 100%; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 40px; }
+
+
+
+/* NOVO LOGO INTEGRADO À POLÍTICA DE CORES */
+
+.logo-master-box { display: flex; align-items: stretch; gap: 8px; }
+
+.logo-precificador-v {
+
+    writing-mode: vertical-rl; text-orientation: mixed; transform: rotate(180deg);
+
+    font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 900;
+
+    color: var(--cor-precificador); text-transform: uppercase; line-height: 1;
+
+    display: flex; justify-content: space-between; align-items: center; transition: color 0.5s ease;
+
+}
+
+.logo-right-content { display: flex; flex-direction: column; width: fit-content; }
+
+.logo-sdm-main {
+
+    font-family: 'Outfit', sans-serif; font-size: 90px; font-weight: 900;
+
+    color: var(--primary-color); letter-spacing: -5px; line-height: 0.82; margin: 0; transition: color 0.5s ease;
+
+}
+
+.logo-sdm-sub {
+
+    font-family: 'Montserrat', sans-serif; font-size: 9.5px; font-weight: 900;
+
+    color: var(--cor-assinatura); text-transform: uppercase; white-space: nowrap;
+
+    letter-spacing: 3.9px; width: 100%; display: block; margin-top: 2px; margin-right: -3.9px; text-align: center; transition: color 0.5s ease;
+
+}
+
+
+
+.label-mini { font-size: 9px; font-weight: 900; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 2px; display: block; }
+
+.input-header { border: none; border-bottom: 2px solid #f1f5f9; padding: 4px 0; font-weight: 700; font-size: 14px; color: #1e293b; width: 100%; outline: none; transition: all 0.3s ease; background: transparent; font-style: italic; }
+
+.input-header:focus { border-bottom-color: var(--primary-color); }
+
+
+
+/* Estilo específico para o Select de Origem */
+
+select.input-header { appearance: none; cursor: pointer; }
+
+
+
+.painel-investimento { text-align: right; min-width: 320px; padding-left: 40px; border-left: 1px solid #f1f5f9; }
+
+.valor-master { font-size: 42px; font-weight: 900; color: #0f172a; line-height: 1; letter-spacing: -1.5px; transition: color 0.5s ease; }
+
+
+
+/* PAINEL PRICE */
+
+#resumo-flutuante { position: fixed; bottom: 40px; left: -300px; width: 300px; background: #1e293b; color: white; border-radius: 0 24px 24px 0; padding: 25px; box-shadow: 10px 0 30px rgba(0,0,0,0.15); font-family: 'Outfit', sans-serif; z-index: 150; transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+
+#resumo-flutuante.aberto { left: 0; }
+
+.btn-toggle-resumo { position: absolute; right: -32px; bottom: 20px; width: 32px; height: 80px; background: white; color: #94a3b8; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; text-orientation: mixed; cursor: pointer; border-radius: 0 8px 8px 0; font-size: 9px; font-weight: 900; letter-spacing: 2px; box-shadow: 4px 0 10px rgba(0,0,0,0.05); border: 1px solid #e2e8f0; border-left: none; }
+
+
+
+.main-wrapper { display: flex; justify-content: center; align-items: flex-start; padding: 40px; gap: 20px; max-width: 1400px; margin: 0 auto; }
+
+.col-principal { width: 900px; display: flex; flex-direction: column; gap: 25px; position: relative; }
+
+
+
+/* FICHA */
+
+#ficha-resumo { width: 0; opacity: 0; overflow: hidden; background: white; border-radius: 30px; padding: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.06); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #f1f5f9; min-height: 550px; }
+
+#ficha-resumo.aberto { width: 380px; opacity: 1; padding: 35px; }
+
+.ficha-titulo { font-size: 14px; font-weight: 900; color: #0f172a; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #f1f5f9; padding-bottom: 15px; margin-bottom: 25px; }
+
+.ficha-secao-label { font-size: 10px; font-weight: 900; color: #94a3b8; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; display: block; }
+
+.ficha-tipologia { font-size: 18px; font-weight: 700; color: #1e293b; margin-bottom: 25px; }
+
+.ficha-linha { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 13px; color: #475569; }
+
+.ficha-divisor-pontilhado { border-top: 2px dotted #e2e8f0; margin: 20px 0; }
+
+.ficha-total-m2 { display: flex; justify-content: space-between; align-items: center; font-weight: 900; font-size: 18px; color: #0f172a; }
+
+.tag-alvara { display: inline-block; padding: 6px 14px; border-radius: 8px; font-size: 10px; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: all 0.3s; }
+
+.tag-alvara.incluso { background: #dcfce7; color: #166534; }
+
+.tag-alvara.pendente { background: #fee2e2; color: #991b1b; }
+
+
+
+.btn-toggle-ficha { position: absolute; right: -32px; top: 40px; width: 32px; height: 140px; background: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; text-orientation: mixed; cursor: pointer; border-radius: 0 12px 12px 0; font-size: 9px; font-weight: 900; letter-spacing: 2px; z-index: 10; transition: background 0.5s ease; }
+
+
+
+/* DETALHE COLORIDO METRAGEM */
+
+.detalhe-metragem { border-left: 6px solid var(--primary-color); padding-left: 30px; transition: border-color 0.5s ease; }
+
+
+
+/* ITENS PRICE */
+
+.resumo-item { display: flex; justify-content: space-between; font-size: 11px; margin-bottom: 6px; color: #94a3b8; align-items: center; }
+
+.resumo-item span:last-child { color: white; font-weight: 600; }
+
+.resumo-divisor { border-top: 1px dashed #334155; margin: 12px 0; }
+
+.resumo-total-box { background: var(--primary-color); margin: 15px -25px -25px -25px; padding: 20px; border-radius: 0 0 24px 0; transition: background 0.5s ease; }
+
+.btn-taxa-toggle { cursor: pointer; background: rgba(255,255,255,0.05); padding: 8px 12px; border-radius: 10px; border: 1px solid transparent; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+.btn-taxa-toggle.active { border-color: var(--primary-color); background: rgba(255, 255, 255, 0.05); }
+
+
+
+.card-simulado { background: white; border-radius: 40px; box-shadow: 0 10px 30px -5px rgba(0,0,0,0.04); width: 100%; padding: 60px; min-height: 450px; position: relative; display: flex; flex-direction: column; }
+
+.label-passo { font-size: 12px; font-weight: 900; color: var(--primary-color); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 50px; display: block; text-align: center; transition: color 0.5s ease; }
+
+.input-m2 { font-size: 72px; font-weight: 900; color: var(--primary-color); text-align: center; border: none; outline: none; width: 100%; background: transparent; font-style: italic; letter-spacing: -3px; transition: color 0.5s ease; }
+
+.btn-master { height: 160px; font-size: 16px; color: #1e293b; border: 2px solid #f1f5f9; border-radius: 25px; cursor: pointer; transition: all 0.4s; background: white; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 600; }
+
+.btn-master:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+.btn-sub { padding: 22px; font-size: 14px; color: #64748b; border: 2px solid #f1f5f9; border-radius: 50px; cursor: pointer; transition: all 0.4s; background: white; display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 600; margin-bottom: 15px; }
+
+.btn-sub:hover { border-color: var(--primary-color); color: var(--primary-color); }
+
+
+
+#painel-adicionais { width: 100%; background: white; border-radius: 30px; display: none; }
+
+.header-adicionais { padding: 25px 50px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+
+.content-adicionais { max-height: 0; opacity: 0; overflow: hidden; transition: all 0.5s ease; padding: 0 50px; }
+
+.content-adicionais.open { max-height: 1000px; opacity: 1; padding-bottom: 50px; }
+
+.item-tag { display: flex; align-items: center; gap: 12px; min-height: 35px; }
+
+.item-name { font-size: 11px; font-weight: 600; color: #475569; text-transform: uppercase; cursor: pointer; }
+
+.item-tag.active .item-name { color: var(--primary-color); font-weight: 900; }
+
+.input-inline { display: none; }
+
+.item-tag.active .input-inline { display: flex; }
+
+.input-clean { width: 65px; border-bottom: 2px solid var(--primary-color); border-top:none; border-left:none; border-right:none; font-size: 12px; font-weight: 900; color: var(--primary-color); text-align: center; outline: none; background: transparent; }
+
+.step-content { display: none; width: 100%; }
+
+.step-content.active { display: block; animation: fadeIn 0.5s; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ESTILOS PARA IMPRESSÃO (PDF) */
+
+/* Esconde a logo da ficha na tela do computador */
+
+.logo-pdf {
+
+    display: none;
+
+}
+
+/* REFINAMENTO PARA IMPRESSÃO (PDF) */
+
+/* Esconde o cabeçalho novo na tela do PC */
+
+.header-pdf-print {
+
+    display: none;
+
+}
+
+
+
+@media print {
+
+    @page {
+
+        margin: 1.5cm;
+
+        size: portrait; /* Garante orientação vertical */
+
+    }
+
+
+
+    body {
+
+        background: white !important;
+
+        width: 100%;
+
+    }
+
+
+
+    /* Esconde absolutamente tudo que não é a ficha */
+
+    .header-wrapper,
+
+    .col-principal,
+
+    #resumo-flutuante,
+
+    .btn-toggle-ficha,
+
+    #btn-voltar,
+
+    .btn-toggle-resumo,
+
+    button {
+
+        display: none !important;
+
+    }
+
+
+
+    /* Expande a ficha para o tamanho da página A4 */
+
+    #ficha-resumo {
+
+        display: block !important;
+
+        position: static !important; /* Remove do fluxo lateral */
+
+        width: 100% !important;     /* Ocupa a largura total do papel */
+
+        max-width: none !important;
+
+        opacity: 1 !important;
+
+        padding: 0 !important;
+
+        margin: 0 !important;
+
+        box-shadow: none !important;
+
+        border: none !important;
+
+        min-height: auto !important;
+
+    }
+
+
+
+    /* Ajusta o cabeçalho para ocupar as extremidades do papel */
+
+    .header-pdf-print {
+
+        display: flex !important;
+
+        justify-content: space-between;
+
+        align-items: flex-end; /* Alinha a base da logo com a base dos textos */
+
+        border-bottom: 2px solid var(--primary-color) !important;
+
+        padding-bottom: 20px;
+
+        margin-bottom: 30px;
+
+    }
+
+
+
+    /* Melhora a legibilidade dos itens na folha A4 */
+
+    .ficha-linha {
+
+        font-size: 14px !important; /* Aumenta um pouco o texto no papel */
+
+        margin-bottom: 12px;
+
+    }
+
+
+
+    /* Ajuste específico para o Título da Ficha no PDF */
+
+@media print {
+
+    .ficha-titulo {
+
+        text-align: center !important;    /* Centraliza o texto */
+
+        font-size: 14px !important;       /* Diminui o tamanho (ajuste entre 12px e 16px como preferir) */
+
+        font-weight: 700 !important;      /* Mantém o peso visual */
+
+        text-transform: uppercase !important;
+
+        letter-spacing: 2px !important;   /* Dá um ar mais técnico/moderno */
+
+       
+
+        /* Espaçamento para não grudar no cabeçalho nem no conteúdo abaixo */
+
+        margin: 20px auto !important;    
+
+        padding-bottom: 5px !important;
+
+        border-bottom: 1px solid #eee !important; /* Linha discreta de separação */
+
+       
+
+        display: block !important;
+
+        width: 100% !important;
+
+    }
+
+}
+
+
+
+    /* Garante que o campo de observações ocupe a largura toda */
+
+  @media print {
+
+    #ficha-obs {
+
+        width: 100% !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        margin-top: 15px !important;
+
+        font-size: 10px !important; /* Fonte menor para combinar com o resto */
+
+        background: transparent !important;
+
+        overflow: hidden !important; /* Remove barras de rolagem no PDF */
+
+        resize: none !important;
+
+        padding: 10px !important;
+
+    }
+
+}
+
+
+
+    /* Força cores e gráficos */
+
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+}
+
+/* --- ADICIONE ISSO NO FINAL DO SEU CSS QUE FUNCIONA --- */
+
+
+
+/* Esconde elementos do PDF na tela do computador */
+
+.header-pdf-print, .ficha-total-investimento {
+
+    display: none;
+
+}
+
+
+
+@media print {
+
+    @page {
+
+        /* Aqui você controla a margem da folha toda */
+
+        margin: 3.5cm 1.5cm 1.5cm 1.5cm;
+
+        size: portrait;
+
+    }
+
+
+
+    body { background: white !important; }
+
+
+
+    /* Esconde a interface do site para o papel */
+
+    .header-wrapper, .col-principal, #resumo-flutuante,
+
+    .btn-toggle-ficha, #btn-voltar, .btn-toggle-resumo,
+
+    .btn-master, .btn-sub, button {
+
+        display: none !important;
+
+    }
+
+
+
+    /* Força a ficha a ocupar o papel inteiro */
+
+ #ficha-resumo {
+
+        display: block !important;
+
+        /* Adiciona um respiro extra antes de começar o conteúdo */
+
+        padding-top: 20px !important;
+
+        width: 100% !important;
+
+        opacity: 1 !important;
+
+        position: static !important;
+
+    }
+
+
+
+    /* Cabeçalho do PDF */
+
+   .header-pdf-print {
+
+        display: flex !important;
+
+        justify-content: space-between !important;
+
+        align-items: flex-start !important;
+
+        /* Aumenta a distância entre o cabeçalho e o título "Ficha de Orçamento" */
+
+        margin-bottom: 40px !important;
+
+        border-bottom: 2px solid var(--primary-color) !important;
+
+        padding-bottom: 15px !important;
+
+    }
+
+    }
+
+
+
+    /* Ajuste da Logo apenas no papel */
+
+    .logo-sdm-main { font-size: 45px !important; letter-spacing: -2px !important; line-height: 0.8 !important; }
+
+    .logo-precificador-v { font-size: 7px !important; display: flex !important; }
+
+    .logo-sdm-sub { font-size: 6px !important; letter-spacing: 2px !important; }
+
+
+
+    /* Novo Destaque do Investimento Total no PDF */
+
+    .ficha-total-investimento {
+
+        display: flex !important;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+        margin-top: 20px;
+
+        padding: 20px;
+
+        background: #f8fafc !important;
+
+        border-radius: 12px;
+
+        border-left: 6px solid var(--primary-color);
+
+    }
+
+    .ficha-total-investimento span:first-child {
+
+        font-size: 11px;
+
+        font-weight: 700;
+
+        text-transform: uppercase;
+
+        color: #64748b;
+
+    }
+
+    .ficha-total-investimento span:last-child {
+
+        font-size: 26px !important;
+
+        font-weight: 900;
+
+        color: var(--primary-color) !important;
+
+    }
+
+
+
+    /* Ajustes de texto na ficha para o papel */
+
+    .ficha-titulo { font-size: 22px !important; margin-bottom: 20px !important; border: none !important; }
+
+    .ficha-linha { font-size: 14px !important; margin-bottom: 10px; display: flex !important; }
+
+
+
+    /* Força cores de fundo e bordas na impressão */
+
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+
+
+/* Esconde a logo de imagem e o cabeçalho do PDF na tela normal */
+
+.logo-impressao, .header-pdf-print {
+
+    display: none;
+
+}
+
+
+
+@media print {
+
+    @page {
+
+        margin: 3.5cm 1.5cm 1.5cm 1.5cm;
+
+        size: portrait;
+
+    }
+
+
+
+    /* Ativa o cabeçalho e define o espaço entre os lados */
+
+    .header-pdf-print {
+
+        display: flex !important;
+
+        justify-content: space-between; /* Empurra logo para esquerda e info para direita */
+
+        align-items: center;
+
+        border-bottom: 2px solid var(--primary-color) !important;
+
+        padding-bottom: 15px;
+
+        margin-bottom: 30px;
+
+        width: 100%;
+
+    }
+
+
+
+    /* Ajuste da Imagem da Logo */
+
+    .logo-impressao {
+
+        display: block !important;
+
+        height: 80px; /* Ajuste conforme necessário */
+
+        width: auto;
+
+    }
+
+
+
+    /* Bloco de informações à direita */
+
+    .dados-cliente-pdf {
+
+        text-align: right; /* Justifica o texto à direita */
+
+        font-size: 11px;
+
+        line-height: 1.5;
+
+        color: #1e293b;
+
+    }
+
+
+
+    .pdf-info-linha {
+
+        margin-bottom: 2px;
+
+    }
+
+
+
+    /* Mantém o resto da ficha configurado */
+
+    #ficha-resumo {
+
+        display: block !important;
+
+        width: 100% !important;
+
+        box-shadow: none !important;
+
+        border: none !important;
+
+    }
+
+
+
+    /* Esconde o que não é ficha */
+
+    .header-wrapper, .col-principal, #resumo-flutuante, button {
+
+        display: none !important;
+
+    }
+
+    /* Ajuste para o Select de Vendedor parecer um Input */
+
+select.input-header {
+
+    appearance: none; /* Remove a setinha padrão do Windows */
+
+    -webkit-appearance: none;
+
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+    background-repeat: no-repeat;
+
+    background-position: right 8px center;
+
+    background-size: 12px;
+
+    padding-right: 30px;
+
+}
+
+
+
+/* Garante que as opções dentro do select fiquem legíveis */
+
+select.input-header option {
+
+    background-color: #1e293b; /* Cor escura do seu tema */
+
+    color: white;
+
+}
+
+#wrapper-senha {
+
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+
+
+
+.bloqueado {
+
+    /* Estado inicial que aplicamos via HTML */
+
+    filter: blur(2px);
+
+    opacity: 0.2;
+
+    pointer-events: none;
+
+}
+
+@media print {
+
+    /* Transforma a lista de itens em 2 colunas no PDF */
+
+    #ficha-itens {
+
+        display: grid !important;
+
+        grid-template-columns: repeat(2, 1fr) !important; /* Cria 2 colunas iguais */
+
+        gap: x-5px y-2px !important; /* Espaço entre os itens */
+
+        list-style-type: none !important; /* Remove as bolinhas para ganhar espaço */
+
+        padding-left: 0 !important;
+
+        margin-top: 10px !important;
+
+    }
+
+
+
+    #ficha-itens li {
+
+        font-size: 10px !important; /* Diminui levemente a fonte se houver muitos itens */
+
+        border-left: 2px solid #e2e8f0; /* Um detalhe visual para separar os itens */
+
+        padding-left: 8px;
+
+        margin-bottom: 2px;
+
+    }
+
+
+
+    /* Reduz um pouco o espaçamento das outras seções para garantir que caiba */
+
+    .mt-8 {
+
+        margin-top: 15px !important;
+
+    }
+
+   
+
+    .ficha-total-investimento {
+
+        margin-top: 20px !important;
+
+    }
+
+/* 1. REGRA PARA O SITE (FORA DA IMPRESSÃO) */
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+
+.no-print {
+
+    /* Estilo para o botão de adicionar obs ficar discreto no site */
+
+    display: block;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+/* 2. REGRA PARA O PDF (DENTRO DA IMPRESSÃO) */
+
+@media print {
+
+    /* Esconde o botão "+ ADICIONAR" no papel */
+
+    .no-print {
+
+        display: none !important;
+
+    }
+
+
+
+    /* Formata a caixa de texto se ela estiver ativa */
+
+    #ficha-obs {
+
+        width: 100% !important;
+
+        border: 1px solid #e2e8f0 !important;
+
+        margin-top: 15px !important;
+
+        font-size: 10px !important;
+
+        padding: 10px !important;
+
+        background: transparent !important;
+
+        display: block !important; /* Força aparecer se não tiver a classe hidden */
+
+    }
+
+
+
+    /* Se estiver escondido no site, continua escondido no PDF */
+
+    #ficha-obs.hidden {
+
+        display: none !important;
+
+    }
+
+}
+
+@media print {
+
+    /* Esconde absolutamente tudo o que não for a ficha */
+
+    body * {
+
+        visibility: hidden;
+
+        margin: 0 !important;
+
+    }
+
+
+
+    /* Mostra apenas a ficha e o que está dentro dela */
+
+    #ficha-resumo, #ficha-resumo * {
+
+        visibility: visible;
+
+    }
+
+
+
+    /* Força a ficha a ir para o topo (0,0) da página */
+
+    #ficha-resumo {
+
+        position: absolute;
+
+        left: 0;
+
+        top: 0;
+
+        width: 100%;
+
+        border: none !important;
+
+        box-shadow: none !important;
+
+        background-color: white !important;
+
+        padding: 0 !important;
+
+        margin-top: -10px !important; /* Puxa um pouco mais se ainda houver margem */
+
+    }
+
+    @media print {
+
+    #ficha-resumo {
+
+        /* Remove o arredondamento e sombras que cortam as letras */
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        border: none !important;
+
+       
+
+        /* Garante que o conteúdo não seja cortado */
+
+        overflow: visible !important;
+
+       
+
+        /* Posicionamento no topo da folha */
+
+        position: absolute !important;
+
+        top: 0 !important;
+
+        left: 0 !important;
+
+        width: 100% !important;
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+    }
+
+
+
+    /* Remove qualquer espaçamento do corpo da página que empurre a ficha */
+
+    body {
+
+        margin: 0 !important;
+
+        padding: 0 !important;
+
+        background: white !important;
+
+    }
+
+}
+
+
+
+    /* Esconde o botão de gerar PDF e o botão de observação na impressão */
+
+    .btn-acao-site, .no-print, button {
+
+        display: none !important;
+
+    }
+
+
+
+    /* Define a margem da folha de papel */
+
+    @page {
+
+        margin: 1cm;
+
+        size: auto;
+
+    }
+
+    @media print {
+
+    /* Esconde botões e o painel lateral (Price) no papel */
+
+    button, #resumo-flutuante, .nav-steps, #btn-voltar {
+
+        display: none !important;
+
+    }
+
+
+
+    /* Garante que a ficha ocupe a folha toda sem bordas de card */
+
+    #ficha-resumo {
+
+        border-radius: 0 !important;
+
+        box-shadow: none !important;
+
+        width: 100% !important;
+
+        margin: 0 !important;
+
+    }/* Estado normal: Engenharia escondida */
+
+#ficha-engenharia {
+
+    display: none;
+
+}
+
+
+
+@media print {
+
+    /* MODO ENGENHARIA ATIVO */
+
+    /* No style.css, dentro de @media print, deixe assim: */
+body.imprimindo-engenharia #ficha-engenharia * {
+    visibility: visible !important;
+    /* Remova o display: block !important daqui! */
+}
+
+   
+
+    body.imprimindo-engenharia #ficha-resumo,
+
+    body.imprimindo-engenharia .ficha-titulo,
+
+    body.imprimindo-engenharia .header-pdf-print,
+
+    body.imprimindo-engenharia .dados-cliente-pdf,
+
+    body.imprimindo-engenharia .ficha-secao-label,
+
+    body.imprimindo-engenharia #painel-adicionais {
+
+        display: none !important;
+
+    }
+
+
+
+    /* MODO CLIENTE (Sem a classe no body) */
+
+    body:not(.imprimindo-engenharia) #ficha-engenharia {
+
+        display: none !important;
+
+    }
+
+/* Estado normal: Engenharia sempre escondida na tela */
+#ficha-engenharia {
+    display: none !important;
+}
+
+@media print {
+    /* Se o body tiver a classe de engenharia... */
+    body.imprimindo-engenharia #ficha-engenharia {
+        display: block !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    /* ...então escondemos a ficha do cliente e o cabeçalho padrão */
+    body.imprimindo-engenharia #ficha-resumo,
+    body.imprimindo-engenharia .header-pdf-print,
+    body.imprimindo-engenharia .ficha-titulo {
+        display: none !important;
+    }
+
+    @media print {
+    body.imprimindo-engenharia .header-pdf-print {
+        display: flex !important; /* Força o cabeçalho a aparecer na engenharia */
+    }
+    
+    body.imprimindo-engenharia #eng-corpo-tabela tr:nth-child(even) {
+        background-color: #f8fafc; /* Deixa a tabela zebrada no papel */
+    }
+}
+/* --- COPIE E COLE NO FINAL DO STYLE.CSS --- */
+
+/* Esconde a engenharia na tela do PC */
+#ficha-engenharia {
+    display: none !important;
+}
+
+@media print {
+    /* Se estivermos no modo engenharia... */
+    body.imprimindo-engenharia #ficha-engenharia {
+        display: block !important;
+        background: white !important;
+        width: 100% !important;
+        padding: 0 !important;
+    }
+
+    /* Esconde a ficha do cliente quando for engenharia */
+    body.imprimindo-engenharia #ficha-resumo, 
+    body.imprimindo-engenharia .ficha-titulo,
+    body.imprimindo-engenharia .ficha-total-investimento {
+        display: none !important;
+    }
+    /* --- COPIE E COLE NO FINAL DO STYLE.CSS --- */
+
+@media print {
+    /* Garante que se estivermos imprimindo engenharia, ELA apareça e o resto suma */
+    body.imprimindo-engenharia #ficha-engenharia, 
+    body.imprimindo-engenharia #ficha-engenharia * {
+        visibility: visible !important;
+        display: block !important;
+    }
+
+    /* Força a ficha de engenharia a ficar no topo da página */
+    body.imprimindo-engenharia #ficha-engenharia {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: white !important;
+    }
+
+    /* Garante que a tabela use o display correto */
+    body.imprimindo-engenharia #eng-corpo-tabela {
+        display: table-row-group !important;
+    }
+    body.imprimindo-engenharia #eng-corpo-tabela tr {
+        display: table-row !important;
+    }
+    /* --- ESTILO VISUAL DA FICHA ENGENHARIA (COPIE E COLE NO FIM) --- */
+
+@media print {
+    body.imprimindo-engenharia #ficha-engenharia {
+        display: block !important;
+        background: white !important;
+        border-radius: 30px !important; /* Arredondado igual ao cliente */
+        padding: 40px !important;
+        box-shadow: none !important;
+        border: 1px solid #f1f5f9 !important;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Ajuste da Tabela para ficar elegante */
+    #eng-corpo-tabela tr td {
+        padding: 12px 8px;
+        border-bottom: 1px solid #f1f5f9;
+        color: #475569;
+        font-size: 12px;
+    }
+
+    #eng-corpo-tabela tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Cabeçalho da Tabela */
+    .eng-table-head {
+        background: #f8fafc;
+        color: #64748b;
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 1px;
+    }
+    @media print {
+    /* Quando estiver imprimindo engenharia, esconda a ficha do cliente */
+    body.imprimindo-engenharia #ficha-resumo {
+        display: none !important;
+    }
+    
+    /* Força as colunas a respeitarem o layout técnico */
+    body.imprimindo-engenharia #eng-grid-opcionais {
+        column-count: 3 !important;
+    }
+
+    @media print {
+    body.imprimindo-engenharia #ficha-resumo { display: none !important; } /* Esconde a do cliente */
+    body.imprimindo-engenharia #ficha-engenharia { display: block !important; } /* Mostra a técnica */
+}
+}
+    
+}

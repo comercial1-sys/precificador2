@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Master - Shopping da Madeira</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Outfit:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="resumo-flutuante">
+        <div class="btn-toggle-resumo" onclick="toggleMenuResumo()">PRICE</div>
+        <h3 class="text-[10px] font-black uppercase tracking-[2px] mb-4 text-white">Detalhamento</h3>
+        <div id="res-lista-base" class="space-y-1"></div>
+        <div class="resumo-divisor"></div>
+        <div class="resumo-item font-bold text-white"><span>1. TOTAL OBRA</span><span id="res-total-obra">R$ 0,00</span></div>
+        <div class="resumo-item"><span>Sobras Fixas</span><span>R$ 1.000,00</span></div>
+        <div class="resumo-item font-bold" style="color: var(--primary-color); filter: brightness(1.5);"><span>2. SUBTOTAL</span><span id="res-subtotal">R$ 0,00</span></div>
+        <div class="resumo-divisor"></div>
+        <div class="btn-taxa-toggle active" id="btn-toggle-alvara" onclick="toggleTaxa('alvara')">
+            <span class="tax-label">Alvará (4,5%)</span>
+            <span class="tax-value" id="res-alvara">R$ 0,00</span>
+        </div>
+        <div class="resumo-item font-bold text-white"><span>3. SUBFINAL</span><span id="res-subfinal">R$ 0,00</span></div>
+        <div class="btn-taxa-toggle active" id="btn-toggle-tempo" onclick="toggleTaxa('tempo')">
+            <span class="tax-label">Fator Tempo (0,7%)</span>
+            <span class="tax-value" id="res-tempo">R$ 0,00</span>
+        </div>
+        
+        <div class="mt-4 pt-4 border-t border-gray-200">
+            <button onclick="gerarPDFEngenharia()" class="btn-acao-site" style="width: 100%; background: #475569; color: white; padding: 8px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 5px;">PDF ENGENHARIA</button>
+
+            
+        </div>
+
+        <div class="resumo-total-box">
+            <div class="flex justify-between items-center">
+                <span class="text-[10px] font-bold uppercase text-white">Investimento Final</span>
+                <span id="res-total" class="text-xl font-black text-white">R$ 0,00</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-wrapper">
+        <div class="container-master">
+            <div class="logo-master-box">
+                <div class="logo-precificador-v">
+                    <span>P</span><span>R</span><span>E</span><span>C</span><span>I</span><span>F</span><span>I</span><span>C</span><span>A</span><span>D</span><span>O</span><span>R</span>
+                </div>
+                <div class="logo-right-content">
+                    <h1 class="logo-sdm-main">SdM</h1>
+                    <span class="logo-sdm-sub">SHOPPING DA MADEIRA</span>
+                </div>
+            </div>
+            
+            <div class="flex-grow grid grid-cols-3 gap-x-10 italic">
+                <div class="flex flex-col"><span class="label-mini">Cliente</span><input type="text" id="clienteNome" class="input-header" placeholder="Nome do Cliente"></div>
+                <div class="flex flex-col"><span class="label-mini">WhatsApp</span><input type="text" id="clienteTel" class="input-header" placeholder="(47) 99999-9999"></div>
+                <div class="flex items-end">
+                    <div class="flex flex-col flex-grow">
+                        <span class="label-mini">Vendedor</span>
+                        <select id="vendedor" class="input-header" onchange="solicitarSenha()">
+                            <option value="" disabled selected>Identifique-se...</option>
+                            <option value="Érik">Érik</option>
+                            <option value="Rodrigo">Rodrigo</option>
+                            <option value="Tiago">Tiago</option>
+                        </select>
+                    </div>
+                    <div id="wrapper-senha" class="flex flex-col overflow-hidden transition-all duration-300 w-0 opacity-0 ml-0">
+                        <span class="label-mini text-amber-500">Senha</span>
+                        <input type="password" id="input-senha" class="input-header border-amber-500/30" placeholder="****" oninput="validarAcesso()">
+                    </div>
+                </div>
+
+                <div class="col-span-3 grid grid-cols-4 gap-x-10 mt-4">
+                    <div class="flex flex-col">
+                        <span class="label-mini">Local da Obra</span>
+                        <input list="cidades-logistica" id="local" class="input-header" placeholder="Selecione..." onchange="calcularTudo()">
+                        <datalist id="cidades-logistica"></datalist>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="label-mini">Origem</span>
+                        <select id="origemCliente" class="input-header">
+                            <option value="">Selecione...</option>
+                            <option value="Social">Facebook/Instagram</option>
+                            <option value="Midia">Radio/Tv</option>
+                            <option value="Site">Site</option>
+                            <option value="Indicacao">Indicação</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col"><span class="label-mini">Data</span><input type="text" id="data" class="input-header text-slate-400" readonly></div>
+                    <div class="flex flex-col"><span class="label-mini">Status</span><div class="text-[11px] font-bold text-blue-500 uppercase mt-1">Edição</div></div>
+                </div>
+            </div>
+
+            <div class="painel-investimento italic">
+                <span class="label-mini tracking-[3px]">Investimento Total</span>
+                <div id="totalMaster" class="valor-master text-slate-900">R$ 0,00</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-wrapper opacity-20 pointer-events-none blur-[2px] transition-all duration-700" id="conteudo-principal">
+        <div class="col-principal">
+            <div class="btn-toggle-ficha" id="floating-btn-ficha" onclick="toggleFicha()">ORÇAMENTO</div>
+            <div class="card-simulado">
+                <div id="btn-voltar" class="absolute top-10 left-10 text-[10px] font-black text-slate-300 uppercase cursor-pointer hidden" onclick="voltar()">← Voltar</div>
+                
+                <div id="step-1" class="step-content active">
+                    <span class="label-passo">Selecione o tipo de casa:</span>
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="btn-master" onclick="showStep2('madeira')">MADEIRA</div>
+                        <div class="btn-master" onclick="showStep2('alvenaria')">ALVENARIA</div>
+                        <div class="btn-master" onclick="showStep2('tijolo')">TIJOLO ECO</div>
+                    </div>
+                </div>
+
+                <div id="step-2" class="step-content">
+                    <span class="label-passo">Escolha a especificação:</span>
+                    <div id="sub-options-container" class="max-w-sm mx-auto"></div>
+                </div>
+
+                <div id="step-3" class="step-content">
+                    <span class="label-passo">Informe a Metragem (m²):</span>
+                    <div class="flex justify-center items-center gap-10 max-w-2xl mx-auto detalhe-metragem">
+                        <div class="flex-1 text-center">
+                            <span class="label-mini mb-3">Área Fechada</span>
+                            <input type="number" id="masterFechada" class="input-m2" placeholder="0" oninput="sincronizarPintura(); calcularTudo();">
+                        </div>
+                        <div class="flex-1 text-center">
+                            <span class="label-mini mb-3">Área Aberta</span>
+                            <input type="number" id="masterAberta" class="input-m2" placeholder="0" oninput="sincronizarPintura(); calcularTudo();">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="painel-adicionais">
+                <div class="header-adicionais" onclick="toggleAdicionais()">
+                    <span class="label-mini">Itens Opcionais</span>
+                    <span id="seta-adicionais" class="text-[10px] text-slate-300">DETALHAR ↓</span>
+                </div>
+                <div id="content-adicionais" class="content-adicionais">
+                    <div class="grid grid-cols-2 gap-10">
+                        <div class="space-y-2"> 
+                            <div class="item-tag" id="tag-banheiro"><span class="item-name" onclick="toggleTag('banheiro', 1)">Banheiro Extra</span><div class="input-inline"><input type="number" id="val-banheiro" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-pintura"><span class="item-name" onclick="toggleTag('pintura')">Pintura Total (m²)</span><div class="input-inline"><input type="number" id="val-pintura" class="input-clean" value="0" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-torre"><span class="item-name" onclick="toggleTag('torre', 1)">Torre Tijolo Eco</span><div class="input-inline"><input type="number" id="val-torre" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-torneira"><span class="item-name" onclick="toggleTag('torneira', 1)">Pto Torneira Elétr.</span><div class="input-inline"><input type="number" id="val-torneira" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-veneziana"><span class="item-name" onclick="toggleTag('veneziana', 1)">Venezianas (m²)</span><div class="input-inline"><input type="number" id="val-veneziana" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-forro_inc"><span class="item-name" onclick="toggleTag('forro_inc', 1)">Teto Forro Inc. (m²)</span><div class="input-inline"><input type="number" id="val-forro_inc" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                        </div>
+                        <div class="space-y-2"> 
+                            <div class="item-tag" id="tag-ac"><span class="item-name" onclick="toggleTag('ac', 1)">Ponto de A/C</span><div class="input-inline"><input type="number" id="val-ac" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-janelas"><span class="item-name" onclick="toggleTag('janelas')">Janelas em Madeira</span></div>
+                            <div class="item-tag" id="tag-pivotante"><span class="item-name" onclick="toggleTag('pivotante', 1)">Porta Pivotante BBB100</span><div class="input-inline"><input type="number" id="val-pivotante" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-janela_ex"><span class="item-name" onclick="toggleTag('janela_ex', 1)">Porta Janela Extra</span><div class="input-inline"><input type="number" id="val-janela_ex" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-forro_reto"><span class="item-name" onclick="toggleTag('forro_reto', 1)">Forro Reto Madeira (m²)</span><div class="input-inline"><input type="number" id="val-forro_reto" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                            <div class="item-tag" id="tag-churrasqueira"><span class="item-name" onclick="toggleTag('churrasqueira', 1)">Churrasq. Tijolo Eco</span><div class="input-inline"><input type="number" id="val-churrasqueira" class="input-clean" value="1" oninput="calcularTudo()"></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="ficha-resumo">
+            <div class="header-pdf-print">
+                <div class="logo-pdf-img-container">
+                    <img src="logo.jpg" alt="Shopping da Madeira" class="logo-impressao">
+                </div>
+                <div class="dados-cliente-pdf">
+                    <div class="pdf-info-linha"><strong>Nome do Cliente:</strong> <span id="pdf-cliente-nome">---</span></div>
+                    <div class="pdf-info-linha"><strong>Whatsapp:</strong> <span id="pdf-cliente-whatsapp">---</span></div>
+                    <div class="pdf-info-linha"><strong>Local de Obra:</strong> <span id="pdf-cliente-obra">---</span></div>
+                    <div class="pdf-info-linha"><strong>Data:</strong> <span id="pdf-data">--/--/----</span></div>
+                    <div class="pdf-info-linha"><strong>Orçamentista:</strong> <span id="pdf-orcamentista">---</span></div>
+                </div>                                    
+            </div>
+
+            <div id="bloco-cliente-pdf">
+                <h2 class="ficha-titulo" style="font-size: 18px; letter-spacing: 2px; margin-bottom: 25px;">FICHA DE ORÇAMENTO</h2>
+
+                <span class="ficha-secao-label" style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Tipologia</span>
+                <div id="ficha-modelo" class="ficha-tipologia" style="font-size: 14px; margin-bottom: 12px; font-weight: bold; color: #1e293b;">-</div>
+
+                <span class="ficha-secao-label" style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Detalhamento de Metragem</span>
+                <div style="margin-top: 4px;">
+                    <div class="ficha-linha" style="font-size: 10px; color: #64748b; line-height: 1.2;">
+                        <span>Área Fechada:</span> <span id="ficha-m2-fechada" style="font-weight: 500;">0.00 m²</span>
+                    </div>
+                    <div class="ficha-linha" style="font-size: 10px; color: #64748b; line-height: 1.2;">
+                        <span>Área Aberta:</span> <span id="ficha-m2-aberta" style="font-weight: 500;">0.00 m²</span>
+                    </div>
+                </div>
+                <div class="ficha-divisor-pontilhado" style="margin: 8px 0;"></div>
+                <div class="ficha-linha" style="font-size: 11px; color: #94a3b8; opacity: 0.8;">
+                    <span>Metragem Total:</span> <span id="ficha-m2-total">0.00 m²</span>
+                </div>
+
+                <div class="mt-8">
+                    <span class="ficha-secao-label">Alvará</span>
+                    <div id="ficha-alvara-status" class="tag-alvara incluso">Incluso</div>
+                </div>
+
+                <div class="mt-8">
+                    <span class="ficha-secao-label">Itens Opcionais</span>
+                    <ul id="ficha-itens" class="text-[12px] text-slate-500 list-disc pl-4 mt-2 space-y-1">
+                        <li>Nenhum selecionado</li>
+                    </ul>
+                </div>
+
+                <div class="ficha-total-investimento">
+                    <span>Investimento Total:</span> <span id="pdf-total-investimento">R$ 0,00</span>
+                </div>
+
+                <div id="secao-pagamento" style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
+                    <h3 style="font-size: 10px; text-transform: uppercase; color: #94a3b8; margin-bottom: 5px; font-weight: bold;">Sugestão de Etapas de Pagamento</h3>
+                    <div id="corpo-etapas" style="font-size: 10px; color: #64748b; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; line-height: 1.4;"></div>
+                </div>
+                
+                <textarea id="ficha-obs" class="hidden w-full mt-4 p-4 border border-slate-100 rounded-xl text-xs italic text-slate-400 outline-none" rows="4" placeholder="Observações..."></textarea>
+            </div>
+
+            <div class="no-print mt-4 space-y-2">
+                <button type="button" onclick="toggleObservacao()" class="text-[10px] font-bold text-slate-400 hover:text-primary-color">+ ADICIONAR OBSERVAÇÃO</button>
+                <button type="button" onclick="gerarPDF()" class="btn-acao-site" style="width:100%; padding:15px; background:#475569; color:white; font-weight:bold; border-radius:10px;">GERAR PDF CLIENTE</button>
+            </div>
+        </div>
+
+        <div id="ficha-engenharia" class="ficha-resumo-card" style="display: none;">
+    <div class="header-pdf-print">
+        <div class="logo-pdf-img-container">
+            <img src="logo.jpg" alt="Shopping da Madeira" class="logo-impressao">
+        </div>
+        <div class="dados-cliente-pdf">
+            <div class="pdf-info-linha"><strong>Nome do Cliente:</strong> <span id="eng-pdf-cliente-nome">---</span></div>
+            <div class="pdf-info-linha"><strong>Whatsapp:</strong> <span id="eng-pdf-cliente-whatsapp">---</span></div>
+            <div class="pdf-info-linha"><strong>Local de Obra:</strong> <span id="eng-pdf-cliente-obra">---</span></div>
+            <div class="pdf-info-linha"><strong>Data:</strong> <span id="eng-pdf-data">--/--/----</span></div>
+            <div class="pdf-info-linha"><strong>Orçamentista:</strong> <span id="eng-pdf-orcamentista">---</span></div>
+        </div>                                    
+    </div>
+
+    <div id="bloco-engenharia-pdf">
+        <h2 class="ficha-titulo" style="font-size: 18px; letter-spacing: 2px; margin-bottom: 25px; color: var(--primary-color);">RELATÓRIO DE ENGENHARIA</h2>
+
+        <span class="ficha-secao-label" style="font-size: 9px; color: #94a3b8; text-transform: uppercase;">Dimensões Técnicas</span>
+        <div style="margin-top: 8px; display: flex; gap: 40px; border-bottom: 1px dotted #cbd5e1; padding-bottom: 12px;">
+            <div class="ficha-linha" style="font-size: 12px; color: #1e293b;">
+                <span style="color: #94a3b8; font-size: 9px; text-transform: uppercase; display: block;">Área Fechada</span>
+                <strong id="eng-area-fechada">0.00 m²</strong>
+            </div>
+            <div class="ficha-linha" style="font-size: 12px; color: #1e293b;">
+                <span style="color: #94a3b8; font-size: 9px; text-transform: uppercase; display: block;">Área Aberta</span>
+                <strong id="eng-area-aberta">0.00 m²</strong>
+            </div>
+            <div class="ficha-linha">
+                <span style="color: #94a3b8; font-size: 9px; text-transform: uppercase; display: block;">Área Total</span>
+                <strong id="eng-area-total" style="font-size: 16px; color: var(--primary-color);">0.00 m²</strong>
+            </div>
+        </div>
+
+        <div class="mt-8">
+            <span class="ficha-secao-label">Composição de Custos (Itens Opcionais)</span>
+            <div id="eng-grid-opcionais" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 10px;">
+                </div>
+        </div>
+
+        <div style="text-align: left; line-height: 1.1 !important;">
+    <div style="margin-bottom: 4px;">
+        <span style="font-size: 5pt !important; color: #94a3b8; text-transform: uppercase; display: block; letter-spacing: 0.3px;">Logística e Entrega</span>
+        <span id="eng-logistica-local" style="font-size: 7pt !important; font-weight: 700; color: #64748b;">---</span>
+    </div>
+    <div>
+        <span style="font-size: 5pt !important; color: #94a3b8; text-transform: uppercase; display: block; letter-spacing: 0.3px;">Prazo Estimado</span>
+        <span id="eng-prazo-dias" style="font-size: 7pt !important; font-weight: 700; color: #64748b;">---</span>
+    </div>
+</div>
+    </div>
+</div>
+                                   
+          
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
